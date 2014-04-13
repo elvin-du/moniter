@@ -3,9 +3,10 @@ package main
 import (
 	"fmt"
 	//"io"
-	"bufio"
+	//"bufio"
 	"log"
 	"net"
+	//"time"
 )
 
 func main() {
@@ -21,14 +22,15 @@ func main() {
 		log.Println("client write failed:", err)
 	}
 
-	//bin := make([]byte, 0, 256)
-	//_, err = conn.Read(bin)
+	bin := make([]byte, 256)
+	//conn.SetDeadline(time.Now().Add(time.Minute))
+	_, err = conn.Read(bin)
 	//_, err = io.ReadFull(conn, bin)
-	line, err := bufio.NewReader(conn).ReadString('\n')
+	//line, err := bufio.NewReader(conn).ReadString('\n')
 	if nil != err {
 		log.Println("client read failed:", err)
 		return
 	}
-	//log.Println("get from server:", bin)
-	log.Println("get from server:", line)
+	log.Println("get from server:", string(bin))
+	//log.Println("get from server:", line)
 }
